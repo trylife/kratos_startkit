@@ -1,0 +1,74 @@
+version: '2.1'
+
+services:
+  # app not in docker 100-0-0+
+  # app run in docker 100-1-0+
+  mysql:
+    image: mysql:8
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      #- ${PWD}/.docker/mysql/data:/var/lib/mysql
+      - ${PWD}/.docker/mysql/conf/:/etc/mysql/conf.d/
+      - ${PWD}/.docker/mysql/log:/var/log/mysql
+      #- ${PWD}/.docker/mysql/docker-entrypoint.sh:/usr/local/bin/entrypoint.sh
+      #- ${PWD}/.docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:rw
+    ports:
+      - "10020:3306"
+  adminer:
+    environment:
+      - TZ=Asia/Shanghai
+      - ADMINER_DEFAULT_SERVER=mysql
+      - ADMINER_DEFAULT_DB=mysql
+      - ADMINER_DEFAULT_DRIVER=mysql
+      - ADMINER_DEFAULT_PASSWORD=123456
+      - ADMINER_DEFAULT_USERNAME=root
+      - ADMINER_DEFAULT_AUTOLOGIN=1
+        ADMINER_DEFAULT_NAME=This will be in the title!
+    ports:
+      - "10021:8080"
+    image: adminer
+    restart: always
+  redis:
+    image: docker.io/redis:6-alpine
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "10030:6379"
+  phpRedisAdmin:
+    image: erikdubbelboer/phpredisadmin:latest
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - REDIS_1_HOST=redis
+    ports:
+      - "10031:80"
+  nsqlookupd:
+    image: nsqio/nsq
+    command: /nsqlookupd
+    ports:
+      - "10041:4160"
+      - "10042:4161"
+  nsqd:
+    image: nsqio/nsq
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+    restart: always
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "10043:4150"
+      - "10044:4151"
+  nsqadmin:
+    image: nsqio/nsq
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    restart: always
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "10045:4171"
+

@@ -1,0 +1,15 @@
+server:
+  http:
+    addr: 0.0.0.0:10200
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:10201
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    source: root:root@tcp(127.0.0.1:10020)/test?parseTime=true
+  redis:
+    addr: 127.0.0.1:10030
+    read_timeout: 0.2s
+    write_timeout: 0.2s

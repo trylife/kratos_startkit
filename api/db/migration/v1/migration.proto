@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.project.v1.project;
+
+import "google/api/annotations.proto";
+
+option go_package = "startkit/api/db/migration/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.project.v1.project";
+
+service Migration {
+  rpc ListMigration (ListMigrationRequest) returns (ListMigrationReply) {
+    option (google.api.http) = {
+      get: "/v1/migration/db/{db}/{scope}"
+    };
+  };
+}
+
+message ListMigrationRequest {
+  string db = 1;
+  string scope = 2;
+}
+message ListMigrationReply {
+  MigrationActionList list = 1;
+}
+
+message MigrationActionList {
+  string id = 1;
+  string applied_at = 2;
+}

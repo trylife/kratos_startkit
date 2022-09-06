@@ -87,3 +87,11 @@ migrate:
 	sql-migrate up -config=configs/migration.yaml -env="development_init"
 	sql-migrate up -config=configs/migration.yaml -env="development_basic"
 	sql-migrate up -config=configs/migration.yaml -env="development_test"
+
+.PHONY: migrate-up-db
+migrate-up-db:
+	sql-migrate up -config=./.docker/migration/config/migration.yaml -env="development_init"
+
+.PHONY: migrate-down-db
+migrate-down-db:
+	sql-migrate down -config=./.docker/migration/config/migration.yaml -env="development_init"

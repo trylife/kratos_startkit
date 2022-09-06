@@ -42,6 +42,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.10.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
+	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/kr/pretty v0.2.1 // indirect
 	github.com/lib/pq v1.10.5 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
@@ -57,6 +58,8 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/posener/complete v1.1.1 // indirect
 	github.com/rubenv/sql-migrate v1.1.2 // indirect
+	github.com/spf13/cobra v1.5.0 // indirect
+	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/zclconf/go-cty v1.8.0 // indirect
 	go.opentelemetry.io/otel v1.7.0 // indirect
 	go.opentelemetry.io/otel/trace v1.7.0 // indirect

@@ -1,0 +1,11 @@
+development_basic:
+  dialect: mysql
+  datasource: root:123456@tcp(127.0.0.1:10020)/user_center?parseTime=true
+  dir: migration/basic
+  table: migration_basic
+
+development_test:
+  dialect: mysql
+  datasource: root:123456@tcp(127.0.0.1:10020)/user_center?parseTime=true
+  dir: migration/test
+  table: migration_test

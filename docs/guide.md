@@ -30,8 +30,17 @@ sql-migrate up -config=configs/migration.yaml -env="development_test"
 
 
 ```bash
-kratos proto add api/project/v1/project/migration.proto 
-kratos proto client api/project/v1/project/migration.proto  
-kratos proto server api/project/v1/project/migration.proto  -t internal/service
+kratos proto add api/uc/user/v1/user.proto 
+kratos proto client api/uc/user/v1/user.proto   
+kratos proto server api/uc/user/v1/user.proto -t internal/service
 
+```
+
+
+# structs
+
+
+```
+/uc/v1/user/:user_uuid
+/{appname}/{module}/{version}/actions 
 ```
